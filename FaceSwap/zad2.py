@@ -12,8 +12,8 @@ from drawing import *
 import FaceRendering
 import utils
 
-print "Press T to draw the keypoints and the 3D model"
-print "Press R to start recording to a video file"
+print("Press T to draw the keypoints and the 3D model")
+print("Press R to start recording to a video file")
 
 #you need to download shape_predictor_68_face_landmarks.dat from the link below and unpack it where the solution file is
 #http://sourceforge.net/projects/dclib/files/dlib/v18.10/shape_predictor_68_face_landmarks.dat.bz2
@@ -22,8 +22,8 @@ print "Press R to start recording to a video file"
 project_dir = os.path.dirname(os.path.realpath(__file__))
 predictor_path = os.path.join(project_dir, "..", "shape_predictor_68_face_landmarks.dat")
 candide_path = os.path.join(project_dir, "..", "candide.npz")
-texture_image_path = os.path.join(project_dir, "..", "data", "jolie.jpg")
-target_image_path = os.path.join(project_dir, "..", "data", "target.jpg")
+texture_image_path = os.path.join(project_dir, "..", "data", "me.jpg")
+target_image_path = os.path.join(project_dir, "..", "data", "jingba.jpg")
 #the smaller this value gets the faster the detection will work
 #if it is too small, the user's face might not be detected
 maxImageSizeForDetection = 320
@@ -66,4 +66,7 @@ if shapes2D is not None:
         if drawOverlay:
             drawPoints(targetImg, shape2D.T)
             drawProjectedShape(targetImg, [mean3DShape, blendshapes], projectionModel, mesh, modelParams, lockedTranslation)
+
+    cv2.imshow("img", targetImg)
+    cv2.imwrite("output.jpg", targetImg)
 
